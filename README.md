@@ -1,16 +1,82 @@
-# React + Vite
+# PennyPilot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+PennyPilot is a personal finance management web application built to help users track income, expenses, budgets, and spending patterns from a simple and interactive dashboard.
 
-Currently, two official plugins are available:
+> PennyPilot is currently under active development. The current version stores data locally in the browser. Authentication and database integration are planned for the full-stack version.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Dashboard
+- Opening balance setup
+- Current balance calculation
+- Income and expense tracking
+- Recorded savings rate
+- Spending overview
+- Recent transactions
+- Monthly budget overview
 
-## Expanding the ESLint configuration
+### Transactions
+- Add income and expenses
+- Edit transactions
+- Delete transactions
+- Search transactions
+- Filter by transaction type
+- Filter by category
+- Automatic dashboard updates
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Budget Management
+- Create monthly budget
+- Allocate budget across categories
+- Edit budget plan
+- Reset budget
+- Start a new monthly cycle
+- Track spent and remaining amount
+- Budget usage percentage
+- Safe, Watch, Warning and Over Budget states
+
+### Advanced Analytics
+- Income vs Expenses visualization
+- Report period filtering
+- Category-wise spending analysis
+- Net cash flow
+- Savings rate analysis
+- Largest expense detection
+- Largest spending category
+- Transaction summary
+
+---
+
+## Tech Stack
+
+- React
+- Vite
+- JavaScript
+- CSS
+- Recharts
+- LocalStorage
+- Git & GitHub
+
+---
+
+## How PennyPilot Works
+
+PennyPilot currently stores financial data inside the user's browser using LocalStorage.
+
+The dashboard calculates:
+
+Current Balance = Opening Balance + Income - Expenses
+
+Opening Balance is not counted as income.
+
+Analytics uses recorded transactions to calculate spending patterns and financial reports.
+
+---
+
+## Getting Started
+
+Clone the repository:
+
+```bash
+git clone https://github.com/aryanchitnis2020-stack/pennypilot.git
