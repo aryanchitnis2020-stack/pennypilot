@@ -30,6 +30,7 @@ import Budgets from './pages/Budgets'
 
 import Analytics from './pages/Analytics'
 import SavingsGoals from './pages/SavingsGoals'
+import RecurringPayments from './pages/RecurringPayments'
 
 
 
@@ -682,6 +683,9 @@ function App() {
         ) : activePage === 'Savings Goals' ? (
 
           <SavingsGoals />
+        ) : activePage === 'Recurring Payments' ? (
+
+          <RecurringPayments />
         ) : (
 
           <>
