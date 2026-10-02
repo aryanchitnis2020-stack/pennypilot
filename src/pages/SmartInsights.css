@@ -1,0 +1,422 @@
+/* Smart Financial Insights */
+.insights-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  color: #111827;
+}
+
+.insights-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 26px;
+}
+
+.insights-eyebrow,
+.insights-panel-kicker {
+  margin: 0 0 7px;
+  color: #6366f1;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.insights-header h1 {
+  margin: 0 0 8px;
+  font-size: clamp(26px, 3vw, 34px);
+  letter-spacing: -0.03em;
+}
+
+.insights-header > div:first-child > p:last-child {
+  margin: 0;
+  color: #6b7280;
+  line-height: 1.55;
+  font-size: 14px;
+}
+
+.insights-period {
+  min-width: 170px;
+  padding: 14px 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 5px 18px rgba(15, 23, 42, 0.04);
+}
+
+.insights-period span {
+  display: block;
+  margin-bottom: 5px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.insights-period strong {
+  font-size: 14px;
+}
+
+.insights-summary {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.insight-stat-card,
+.insights-panel {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 17px;
+  box-shadow: 0 5px 20px rgba(15, 23, 42, 0.04);
+}
+
+.insight-stat-card {
+  min-width: 0;
+  padding: 20px;
+}
+
+.insight-stat-card > span {
+  display: block;
+  margin-bottom: 9px;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.insight-stat-card > strong {
+  display: block;
+  min-height: 34px;
+  margin-bottom: 6px;
+  font-size: 24px;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+}
+
+.insight-stat-card small {
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.insight-positive { color: #16a34a; }
+.insight-negative { color: #dc2626; }
+
+.insights-main-grid,
+.insights-bottom-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(360px, 0.85fr);
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.insights-bottom-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.insights-panel {
+  min-width: 0;
+  padding: 22px;
+}
+
+.insights-panel-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.insights-panel-header h2 {
+  margin: 0;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+}
+
+.insights-panel-kicker { margin-bottom: 5px; }
+
+.insights-live-badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 11px;
+  font-weight: 800;
+}
+
+.insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.insight-item {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 13px;
+  align-items: flex-start;
+  padding: 15px;
+  border: 1px solid #eef2f7;
+  border-radius: 13px;
+  background: #fbfdff;
+}
+
+.insight-item-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #eef2ff;
+  font-size: 19px;
+}
+
+.insight-item h3 {
+  margin: 1px 0 5px;
+  font-size: 14px;
+}
+
+.insight-item p {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.tone-success { border-color: #dcfce7; background: #f7fff9; }
+.tone-success .insight-item-icon { background: #dcfce7; }
+.tone-warning { border-color: #fde68a; background: #fffdf5; }
+.tone-warning .insight-item-icon { background: #fef3c7; }
+.tone-danger { border-color: #fecaca; background: #fffafa; }
+.tone-danger .insight-item-icon { background: #fee2e2; }
+.tone-purple { border-color: #ddd6fe; background: #faf9ff; }
+.tone-purple .insight-item-icon { background: #ede9fe; }
+
+.budget-health-total,
+.goal-insight-total {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 17px;
+}
+
+.budget-health-total div,
+.goal-insight-total div {
+  padding: 14px;
+  border-radius: 12px;
+  background: #f8fafc;
+}
+
+.budget-health-total span,
+.goal-insight-total span {
+  display: block;
+  margin-bottom: 6px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.budget-health-total strong,
+.goal-insight-total strong {
+  font-size: 17px;
+}
+
+.insights-progress {
+  width: 100%;
+  height: 10px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e2e8f0;
+}
+
+.insights-progress > div {
+  height: 100%;
+  min-width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #6366f1, #8b5cf6);
+  transition: width 0.3s ease;
+}
+
+.insights-progress-label {
+  margin: 8px 0 19px;
+  color: #64748b;
+  font-size: 11px;
+}
+
+.budget-health-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.budget-health-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 12px;
+  border: 1px solid #eef2f7;
+  border-radius: 11px;
+}
+
+.budget-health-row > div { min-width: 0; }
+.budget-health-row strong,
+.budget-health-row span { display: block; }
+.budget-health-row strong { margin-bottom: 3px; font-size: 13px; }
+.budget-health-row span { color: #94a3b8; font-size: 11px; }
+
+.budget-health-status {
+  flex-shrink: 0;
+  padding: 5px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.status-safe { background: #dcfce7; color: #166534; }
+.status-watch { background: #fef3c7; color: #92400e; }
+.status-warning { background: #ffedd5; color: #c2410c; }
+.status-over-budget { background: #fee2e2; color: #b91c1c; }
+
+.goal-progress { margin-bottom: 17px; }
+
+.nearest-goal {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px;
+  border: 1px solid #ddd6fe;
+  border-radius: 12px;
+  background: #faf9ff;
+}
+
+.nearest-goal span {
+  color: #7c3aed;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.nearest-goal strong { font-size: 14px; }
+.nearest-goal small { color: #64748b; font-size: 11px; }
+
+.upcoming-list {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.upcoming-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 12px;
+  border: 1px solid #eef2f7;
+  border-radius: 11px;
+}
+
+.upcoming-row > div:first-child { min-width: 0; }
+.upcoming-row strong,
+.upcoming-row span { display: block; }
+.upcoming-row strong { margin-bottom: 4px; font-size: 13px; }
+.upcoming-row span { color: #94a3b8; font-size: 11px; }
+
+.upcoming-amount {
+  flex-shrink: 0;
+  text-align: right;
+}
+
+.upcoming-amount strong { color: #111827; }
+.upcoming-amount span { color: #b45309; }
+
+.overdue-note {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fff1f2;
+  color: #be123c;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.insights-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 230px;
+  text-align: center;
+  padding: 20px;
+}
+
+.insights-empty.compact { min-height: 175px; }
+
+.insights-empty > span {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #6366f1;
+  font-size: 22px;
+}
+
+.insights-empty h3 { margin: 0 0 6px; font-size: 14px; }
+.insights-empty p {
+  max-width: 360px;
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.insights-footer-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  padding: 13px 15px;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  background: #f8fbff;
+  color: #475569;
+}
+
+.insights-footer-note span {
+  color: #2563eb;
+  font-weight: 800;
+}
+
+.insights-footer-note p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+@media (max-width: 1100px) {
+  .insights-summary { grid-template-columns: repeat(2, 1fr); }
+  .insights-main-grid,
+  .insights-bottom-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .insights-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .insights-period { width: 100%; }
+  .insights-summary { grid-template-columns: 1fr; }
+  .insights-panel { padding: 18px; }
+  .budget-health-total,
+  .goal-insight-total { grid-template-columns: 1fr; }
+  .upcoming-row { align-items: flex-start; }
+}

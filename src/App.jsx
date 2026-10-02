@@ -31,6 +31,7 @@ import Budgets from './pages/Budgets'
 import Analytics from './pages/Analytics'
 import SavingsGoals from './pages/SavingsGoals'
 import RecurringPayments from './pages/RecurringPayments'
+import SmartInsights from './pages/SmartInsights'
 
 
 
@@ -686,6 +687,9 @@ function App() {
         ) : activePage === 'Recurring Payments' ? (
 
           <RecurringPayments />
+        ) : activePage === 'AI Insights' ? (
+
+          <SmartInsights transactions={transactions} />
         ) : (
 
           <>
