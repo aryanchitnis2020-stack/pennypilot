@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -10,4 +5,121 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+enum RecurringFrequency {
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum RecurringStatus {
+  ACTIVE
+  PAUSED
+}
+
+model User {
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  passwordHash   String
+  openingBalance Decimal  @default(0) @db.Decimal(14, 2)
+
+  transactions      Transaction[]
+  budgetPlans       BudgetPlan[]
+  savingsGoals      SavingsGoal[]
+  recurringPayments RecurringPayment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Transaction {
+  id       String          @id @default(cuid())
+  title    String
+  amount   Decimal         @db.Decimal(14, 2)
+  type     TransactionType
+  category String
+  date     DateTime        @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, date])
+}
+
+model BudgetPlan {
+  id            String  @id @default(cuid())
+  period        String
+  monthlyBudget Decimal @db.Decimal(14, 2)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  allocations BudgetAllocation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, period])
+  @@index([userId])
+}
+
+model BudgetAllocation {
+  id       String  @id @default(cuid())
+  category String
+  amount   Decimal @db.Decimal(14, 2)
+
+  budgetPlanId String
+  budgetPlan   BudgetPlan @relation(fields: [budgetPlanId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([budgetPlanId, category])
+  @@index([budgetPlanId])
+}
+
+model SavingsGoal {
+  id          String   @id @default(cuid())
+  name        String
+  targetAmount Decimal  @db.Decimal(14, 2)
+  savedAmount  Decimal  @default(0) @db.Decimal(14, 2)
+  deadline     DateTime?
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model RecurringPayment {
+  id        String             @id @default(cuid())
+  name      String
+  amount    Decimal            @db.Decimal(14, 2)
+  category  String
+  frequency RecurringFrequency
+  nextDue   DateTime
+  status    RecurringStatus    @default(ACTIVE)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([userId, nextDue])
 }
