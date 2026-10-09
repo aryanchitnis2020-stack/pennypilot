@@ -1,3 +1,4 @@
+import { writeLocalData } from '../lib/cloudData'
 import { useEffect, useMemo, useState } from 'react'
 import './RecurringPayments.css'
 
@@ -100,7 +101,7 @@ function RecurringPayments() {
   const [categoryFilter, setCategoryFilter] = useState('All')
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(payments))
+    writeLocalData(STORAGE_KEY, JSON.stringify(payments))
   }, [payments])
 
   const openCreateForm = () => {

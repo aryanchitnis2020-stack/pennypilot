@@ -1,3 +1,4 @@
+import { writeLocalData, removeLocalData } from '../lib/cloudData'
 import { useEffect, useMemo, useState } from 'react'
 import './Budgets.css'
 
@@ -40,7 +41,7 @@ function Budgets({ transactions }) {
 
   useEffect(() => {
     if (budgetPlan) {
-      localStorage.setItem(
+      writeLocalData(
         BUDGET_PLAN_KEY,
         JSON.stringify(budgetPlan)
       )
@@ -171,7 +172,7 @@ function Budgets({ transactions }) {
 
     setBudgetPlan(newPlan)
 
-    localStorage.setItem(
+    writeLocalData(
       BUDGET_PLAN_KEY,
       JSON.stringify(newPlan)
     )
@@ -188,7 +189,7 @@ function Budgets({ transactions }) {
       return
     }
 
-    localStorage.removeItem(BUDGET_PLAN_KEY)
+    removeLocalData(BUDGET_PLAN_KEY)
     setBudgetPlan(null)
     setShowSetup(false)
   }
@@ -207,7 +208,7 @@ function Budgets({ transactions }) {
       cycleStart: Date.now(),
     }
 
-    localStorage.setItem(
+    writeLocalData(
       BUDGET_PLAN_KEY,
       JSON.stringify(nextPlan)
     )

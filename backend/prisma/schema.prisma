@@ -29,6 +29,8 @@ model User {
   email          String   @unique
   passwordHash   String
   openingBalance Decimal  @default(0) @db.Decimal(14, 2)
+  appData        Json?
+  dataVersion    Int      @default(0)
 
   transactions      Transaction[]
   budgetPlans       BudgetPlan[]

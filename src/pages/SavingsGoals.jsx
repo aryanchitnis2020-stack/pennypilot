@@ -1,3 +1,4 @@
+import { writeLocalData } from '../lib/cloudData'
 import { useEffect, useMemo, useState } from 'react'
 import './SavingsGoals.css'
 
@@ -23,7 +24,7 @@ function SavingsGoals() {
   })
 
   useEffect(() => {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(goals))
+    writeLocalData(STORAGE_KEY, JSON.stringify(goals))
   }, [goals])
 
   const totalTarget = useMemo(

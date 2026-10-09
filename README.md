@@ -1,82 +1,89 @@
-# PennyPilot
+# PennyPilot — personal finance tracker
 
-PennyPilot is a personal finance management web application built to help users track income, expenses, budgets, and spending patterns from a simple and interactive dashboard.
+React/Vite frontend with an Express/Prisma/PostgreSQL backend. Sign in, manage income/expenses, budgets, savings goals and recurring payments. Analytics and Smart Insights derive their figures from your saved records.
 
-> PennyPilot is currently under active development. The current version stores data locally in the browser. Authentication and database integration are planned for the full-stack version.
+## What's included in this MVP
 
----
+- Register, sign in, restore session and sign out (bcrypt password hashes + HttpOnly JWT cookie).
+- Account-isolated cloud data at `/api/data` (JSON snapshot stored in PostgreSQL using Prisma).
+- Dashboard, transactions, monthly budgets, savings goals, recurring payments, analytics and Smart Insights.
+- Auto-save after changes; sync status and retry control in the sidebar.
+- One-time import of existing browser LocalStorage data, with backup before replacement.
+- Optimistic version check: an older tab cannot silently overwrite changes made in another tab.
+- Single-origin production serving from Express; Vite `/api` proxy in development.
 
-## Features
+**Architecture note:** The existing normalized Prisma models for transactions, budgets, goals and recurring payments remain in the schema. This MVP saves the UI state as a per-user JSON snapshot in `User.appData` to preserve the current UI's record IDs and monthly budget cycles without rewriting every page. Future versions can migrate to individual CRUD endpoints.
 
-### Dashboard
-- Opening balance setup
-- Current balance calculation
-- Income and expense tracking
-- Recorded savings rate
-- Spending overview
-- Recent transactions
-- Monthly budget overview
+## First-time setup (Windows / PowerShell)
 
-### Transactions
-- Add income and expenses
-- Edit transactions
-- Delete transactions
-- Search transactions
-- Filter by transaction type
-- Filter by category
-- Automatic dashboard updates
+Prerequisites: Node.js 22+ and access to your existing PostgreSQL database.
 
-### Budget Management
-- Create monthly budget
-- Allocate budget across categories
-- Edit budget plan
-- Reset budget
-- Start a new monthly cycle
-- Track spent and remaining amount
-- Budget usage percentage
-- Safe, Watch, Warning and Over Budget states
+**IMPORTANT:** Do not delete or overwrite your existing `backend/.env`. It contains your database connection strings and JWT secret. The ZIP deliberately excludes it.
 
-### Advanced Analytics
-- Income vs Expenses visualization
-- Report period filtering
-- Category-wise spending analysis
-- Net cash flow
-- Savings rate analysis
-- Largest expense detection
-- Largest spending category
-- Transaction summary
+In `backend/.env`, you need `DATABASE_URL`, `DIRECT_URL`, and `JWT_SECRET` (random string, at least 32 characters). See `backend/.env.example` for variable names only.
 
----
+### 1. Backend dependencies and database migration
 
-## Tech Stack
+```powershell
+cd "C:\Users\ARYAN\Penny pilot\backend"
+npm ci
+npm run db:deploy
+npm run db:generate
+npm start
+```
 
-- React
-- Vite
-- JavaScript
-- CSS
-- Recharts
-- LocalStorage
-- Git & GitHub
+Leave this terminal running. Check `http://localhost:5000/api/health`.
 
----
+### 2. Frontend
 
-## How PennyPilot Works
+Open a **second** terminal:
 
-PennyPilot currently stores financial data inside the user's browser using LocalStorage.
+```powershell
+cd "C:\Users\ARYAN\Penny pilot"
+npm ci
+npm run dev
+```
 
-The dashboard calculates:
+Open `http://localhost:5173` and sign in. Existing accounts work; if you have old browser data, PennyPilot will ask whether to import it. You can double-click `START-PENNYPILOT.bat` on future runs after the first-time setup.
 
-Current Balance = Opening Balance + Income - Expenses
+### 3. Tests
 
-Opening Balance is not counted as income.
+```powershell
+cd "C:\Users\ARYAN\Penny pilot\backend"
+npm test
+```
 
-Analytics uses recorded transactions to calculate spending patterns and financial reports.
+From project root, run `npm run build` to build the frontend.
 
----
+## Production deployment (one Railway service)
 
-## Getting Started
+Use a **single service** so the React app and API share an origin; this avoids cross-site cookie problems.
 
-Clone the repository:
+- Deploy the GitHub repository from the project root.
+- Build command: `npm ci && npm run build && cd backend && npm ci && npm run db:generate`
+- Start command: `cd backend && npm run db:deploy && npm start`
+- Environment variables: `DATABASE_URL`, `DIRECT_URL`, `JWT_SECRET` and `NODE_ENV=production`.
+- Health check path: `/api/health`.
 
-```bash
-git clone https://github.com/aryanchitnis2020-stack/pennypilot.git
+Do not paste secrets into GitHub, screenshots, or deployment logs. Confirm the PostgreSQL direct connection works from the deployment provider before launching.
+
+## API overview
+
+| Method | Path | Purpose |
+|---|---|---|
+| GET | `/api/health` | Backend health |
+| POST | `/api/auth/register` | Create account |
+| POST | `/api/auth/login` | Sign in, set HttpOnly session cookie |
+| GET | `/api/auth/me` | Check authenticated session |
+| POST | `/api/auth/logout` | Clear session cookie |
+| GET | `/api/data` | Read signed-in user's data + version |
+| PUT | `/api/data` | Validate and save snapshot with version check |
+
+All `/api/data` routes require a valid session. The server accepts same-origin browser requests; development uses Vite's proxy.
+
+## Limitations / next improvements
+
+- The cloud snapshot uses a last-writer-per-version workflow, not real-time collaborative merging. If another tab changes data, download a local backup before reloading.
+- No password-reset email or email verification yet.
+- No bank connection, real AI service or scheduled payment processing; Smart Insights are rule-based and recurring payments are manually tracked.
+- Do an end-to-end test with your own database and hosting environment before calling this production-ready.

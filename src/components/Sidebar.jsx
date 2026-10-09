@@ -1,4 +1,4 @@
-function Sidebar({ activePage, setActivePage }) {
+function Sidebar({ activePage, setActivePage, user, onLogout, syncStatus, onRetrySync, onDownloadBackup }) {
   const sidebarStyle = {
     width: '240px',
     minWidth: '240px',
@@ -7,6 +7,8 @@ function Sidebar({ activePage, setActivePage }) {
     color: '#ffffff',
     padding: '30px 20px',
     flexShrink: 0,
+    display: 'flex',
+    flexDirection: 'column',
   }
 
   const logoStyle = {
@@ -122,6 +124,20 @@ function Sidebar({ activePage, setActivePage }) {
           AI Insights
         </button>
       </nav>
+      <div style={{ marginTop: 'auto', paddingTop: '32px' }}>
+        <div style={{ borderTop: '1px solid #374151', paddingTop: '22px', fontSize: '13px' }}>
+          <div style={{ fontWeight: 750, overflowWrap: 'anywhere', marginBottom: '5px' }}>{user?.name}</div>
+          <div style={{ color: '#9ca3af', fontSize: '11px', overflowWrap: 'anywhere' }}>{user?.email}</div>
+          <div style={{ marginTop: '16px', fontSize: '12px', color: syncStatus === 'Saved' ? '#86efac' : '#fcd34d' }}>
+            ● {syncStatus}
+          </div>
+          {syncStatus !== 'Saved' && syncStatus !== 'Saving...' && syncStatus !== 'Signing out...' && (
+            <button type="button" onClick={onRetrySync} style={{ ...buttonStyle, padding: '8px 0', color: '#c7d2fe' }}>Retry sync</button>
+          )}
+          <button type="button" onClick={onDownloadBackup} style={{ ...buttonStyle, padding: '8px 0', color: '#c7d2fe' }}>Download backup</button>
+          <button type="button" onClick={onLogout} style={{ ...buttonStyle, marginTop: '10px', background: '#1f2937', color: '#fff', textAlign: 'center' }}>Sign out</button>
+        </div>
+      </div>
     </aside>
   )
 }

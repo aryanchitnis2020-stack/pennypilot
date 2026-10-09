@@ -1,3 +1,4 @@
+import { writeLocalData } from './lib/cloudData'
 import { useEffect, useState } from 'react'
 
 import './App.css'
@@ -49,7 +50,7 @@ const formatMoney = (amount) =>
 
 
 
-function App() {
+function App({ user, onLogout, syncStatus, onRetrySync, onDownloadBackup }) {
 
   const [activePage, setActivePage] = useState('Dashboard')
 
@@ -175,7 +176,7 @@ function App() {
 
     try {
 
-      localStorage.setItem(OPENING_BALANCE_KEY, String(openingBalance))
+      writeLocalData(OPENING_BALANCE_KEY, String(openingBalance))
 
     } catch (error) {
 
@@ -249,7 +250,7 @@ function App() {
 
     try {
 
-      localStorage.setItem(
+      writeLocalData(
 
         STORAGE_KEY,
 
@@ -654,6 +655,11 @@ function App() {
         activePage={activePage}
 
         setActivePage={setActivePage}
+        user={user}
+        onLogout={onLogout}
+        syncStatus={syncStatus}
+        onRetrySync={onRetrySync}
+        onDownloadBackup={onDownloadBackup}
 
       />
 
